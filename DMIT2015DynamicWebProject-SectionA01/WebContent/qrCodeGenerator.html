@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>QR Code Generator</title>
+</head>
+<body>
+	<h1>QR Code Generator</h1>
+	<form method="post" action="QrCodeImageGeneratorServlet">
+		<label for="url">URL: </label>
+		<input type="text" id="url" name="url" size="100" /> <br />
+		<input type="checkbox" id="download" name="download">Download Image <br />
+		
+		<input type="submit" value="Submit" />		
+		
+	</form>
+	
+	<img src="QrCodeImageGeneratorServlet?url=https://www.nait.ca" />NAIT <br />
+	<img src="QrCodeImageGeneratorServlet?url=https://www.wildfly.org" />Wildfly <br />
+	<img src="QrCodeImageGeneratorServlet?url=https://github.com" />GITHub <br />
+	
+</body>
+</html>
