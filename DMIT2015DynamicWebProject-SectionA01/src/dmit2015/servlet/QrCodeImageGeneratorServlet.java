@@ -31,7 +31,7 @@ public class QrCodeImageGeneratorServlet extends HttpServlet {
 			try {
 				if (request.getParameter("download") != null) {
 					response.setHeader("Content-disposition", 
-						"attachment;customQrCode.png");
+						"attachment;filename=customQrCode.png");
 				}
 				
 				
