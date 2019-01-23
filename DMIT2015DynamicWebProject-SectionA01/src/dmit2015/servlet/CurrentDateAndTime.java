@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class CurrentDateAndTime
@@ -24,6 +25,7 @@ public class CurrentDateAndTime extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		try {
@@ -35,6 +37,9 @@ public class CurrentDateAndTime extends HttpServlet {
 			synchronized (currentDateTime) {
 				currentDateTime = LocalDateTime.now();
 				out.println("<h2>The current date and time is " + currentDateTime + "</h2>" );
+				HttpSession session = request.getSession();
+				session.setAttribute("time", currentDateTime);
+
 			}			
 			out.println("</body>");
 			out.println("</html>");
