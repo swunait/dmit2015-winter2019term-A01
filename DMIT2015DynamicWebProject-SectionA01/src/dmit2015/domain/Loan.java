@@ -1,5 +1,7 @@
 package dmit2015.domain;
 
+import org.apache.commons.math3.util.Precision;
+
 public class Loan {
 	
 	private double mortgageAmount;
@@ -39,7 +41,7 @@ public class Loan {
 		double monthyPayment = 0;
 		monthyPayment = mortgageAmount * (Math.pow(1 + annualInterestRate/200, 1.0/6) - 1)
 				/ (1 - Math.pow(1 + annualInterestRate/200, -12 * amortizationPeriod / 6.0));
-		monthyPayment = roundTo2Decimals(monthyPayment);
+		monthyPayment = Precision.round(monthyPayment, 2);
 		return monthyPayment;
 	}
 	
@@ -55,17 +57,17 @@ public class Loan {
 		for (int paymentNumber = 1; paymentNumber <= numberOfPayments; paymentNumber++) {
 			int index = paymentNumber - 1;
 			interestPaid = monthlyPercentageRate * remainingBalance;
-			interestPaid = roundTo2Decimals(interestPaid);
+			interestPaid = Precision.round(interestPaid, 2);
 			
 			if (remainingBalance < monthlyPayment) {
 				principalPaid = remainingBalance;
 			} else {
 				principalPaid = monthlyPayment - interestPaid;
-				principalPaid = roundTo2Decimals(principalPaid);
+				principalPaid = Precision.round(principalPaid, 2);
 			}
 			
 			remainingBalance = remainingBalance - principalPaid;
-			remainingBalance = roundTo2Decimals(remainingBalance);				
+			remainingBalance = Precision.round(remainingBalance,2 );				
 			
 			LoanSchedule singleLoanSchedule = new LoanSchedule();
 			singleLoanSchedule.setPaymentNumber(paymentNumber);
@@ -78,8 +80,5 @@ public class Loan {
 		return loanScheduleTable;
 	}
 	
-	public static double roundTo2Decimals(double valueToRound)
-	{
-		return Math.round( valueToRound * 100 ) / 100.0;
-	}
+	
 }
