@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui"  
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:hf="http://highfaces.org"
+>
+    <h:head>
+    	<!-- Required meta tags -->
+    	<meta charset="utf-8" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />    
+        
+        <title>Hello World JPA in BootsFaces</title>        
+    </h:head>
+
+	<h:body>
+		<h1>Hello World JPA in BootsFaces</h1>
+		
+		<b:messages id="messages" />
+		
+		<b:form>
+			<b:inputText id="input" value="#{helloWorldJpa.message.text}" label="Input"/>
+			<b:commandButton value="Submit" action="#{helloWorldJpa.submit}"
+				update="messages table">
+			</b:commandButton>
+		</b:form>
+		
+		<b:dataTable id="table" value="#{helloWorldJpa.messages}" var="message">
+			<b:dataTableColumn value="#{message.id}" />
+			<b:dataTableColumn value="#{message.text}" />
+		</b:dataTable>
+		
+	</h:body>
+
+</html>
