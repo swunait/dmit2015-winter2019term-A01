@@ -19,11 +19,30 @@
     	<meta charset="utf-8" />
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />    
         
-        <title>Hello World</title>        
+        <title>BMI Calculator</title>        
     </h:head>
 
 	<h:body>
-		<h1>Hello World</h1>
+		<b:jumbotron><h1>Body Mass Index Calculator</h1></b:jumbotron>
+		
+		<b:messages id="messages"></b:messages>
+		
+		<b:form>
+			<b:inputText id="weight" 
+				label="Weight in pounds"
+				value="#{bodyMassIndexController.currentBMI.weight}">
+			</b:inputText>
+			
+			<b:inputText id="height" 
+				label="Height in inches"
+				value="#{bodyMassIndexController.currentBMI.height}">
+			</b:inputText>
+			<b:commandButton value="Calculate BMI"
+				look="info"
+				action="#{bodyMassIndexController.calculateBmi}"
+				update="messages">
+			</b:commandButton>		
+		</b:form>
 
 
 	</h:body>
