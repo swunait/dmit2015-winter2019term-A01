@@ -1,11 +1,21 @@
 package dmit2015.model;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.apache.commons.math3.util.Precision;
 
 public class Loan {
 	
+	@DecimalMin(value="50000", message="Mortgate Amount must be as least $50,000" )
 	private double mortgageAmount = 100000;
+	
+	@DecimalMin(value="0.01", message="Interest Rate value be greater than zero" )	
 	private double annualInterestRate = 5;
+	
+	@Min(value=1, message="Amortization must be between 1 and 25 years")
+	@Max(value=25, message="Amortization must be between 1 and 25 years")
 	private int amortizationPeriod = 25;
 	
 	public double getMortgageAmount() {
