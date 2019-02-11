@@ -1,11 +1,26 @@
 package dmit2015.model;
 
+import java.io.Serializable;
+
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.DecimalMin;
 
 import org.apache.commons.math3.util.Precision;
 
-public class BodyMassIndex {
-
+@Entity
+public class BodyMassIndex implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;		// +getter +setter
+	
+	private String name;	// +getter +setter 
+	
 	/** weight in pounds */
 	@DecimalMin(value="50", message="Weight must be at least 50lbs")
 	private double weight;	// +getter +setter
@@ -47,6 +62,22 @@ public class BodyMassIndex {
 
 	public void setHeight(double height) {
 		this.height = height;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public BodyMassIndex() {
