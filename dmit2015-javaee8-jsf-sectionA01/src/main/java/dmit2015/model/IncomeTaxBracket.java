@@ -1,17 +1,13 @@
 package dmit2015.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
+@JsonIgnoreProperties({"BracketNo","Region Abbreviation"})
 public @Data class IncomeTaxBracket {
 
-	@JsonProperty("BracketNo")
-	private int bracketNo;
-	
-	@JsonProperty(value="Region Abbreviation")
-	private String regionAbbreviation;
-	
 	@JsonProperty(value="Region Name")
 	private String regionName;	
 	

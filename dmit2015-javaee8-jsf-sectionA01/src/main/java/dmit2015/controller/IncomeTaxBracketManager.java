@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletContext;
 
 import org.omnifaces.util.Messages;
 
@@ -21,9 +19,6 @@ import lombok.Getter;
 @ApplicationScoped	// must implement java.io.Serializable
 public class IncomeTaxBracketManager implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Inject
-	private ServletContext webContext;
 	
 	@Getter private List<IncomeTaxBracket> taxBrackets;
 	
@@ -32,9 +27,6 @@ public class IncomeTaxBracketManager implements java.io.Serializable {
 		CsvSchema schema = CsvSchema.emptySchema().withHeader();
 		CsvMapper mapper = new CsvMapper();
 		try {
-//			MappingIterator<IncomeTaxBracket> iter = mapper.readerFor(IncomeTaxBracket.class)
-//					.with(schema)
-//					.readValues(webContext.getResourceAsStream("/WEB-INF/data/ProvincialPersonalIncomeTaxRates.csv"));
 			MappingIterator<IncomeTaxBracket> iter = mapper.readerFor(IncomeTaxBracket.class)
 					.with(schema)
 					.readValues(Thread.currentThread().getContextClassLoader().getResourceAsStream("/ProvincialPersonalIncomeTaxRates.csv"));
