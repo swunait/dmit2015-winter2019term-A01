@@ -28,11 +28,14 @@ public class IncomeTaxBracketManager implements java.io.Serializable {
 		CsvMapper mapper = new CsvMapper();
 		try {
 			MappingIterator<IncomeTaxBracket> iter = mapper.readerFor(IncomeTaxBracket.class)
-					.with(schema)
-					.readValues(Thread.currentThread().getContextClassLoader().getResourceAsStream("/ProvincialPersonalIncomeTaxRates.csv"));
+				.with(schema)
+				.readValues(
+					//Thread.currentThread().getContextClassLoader().getResourceAsStream("/ProvincialPersonalIncomeTaxRates.csv")
+					this.getClass().getResourceAsStream("/ProvincialPersonalIncomeTaxRates.csv")	
+				);
 			taxBrackets = iter.readAll();
 		} catch(Exception e) {
-			Messages.addGlobalFatal("Error reading from CSV file");
+			Messages.addGlobalFatal("IncomeTaxBracketManager exception: " + e.getMessage());
 		}
 	}
 }
