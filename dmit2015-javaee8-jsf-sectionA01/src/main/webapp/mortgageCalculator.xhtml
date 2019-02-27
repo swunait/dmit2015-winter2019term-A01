@@ -52,8 +52,9 @@
 			</b:form>
 			
 			<br />
-			
-			<b:dataTable id="table" 
+
+			<p:outputPanel id="tablePanel" >
+			<b:dataTable id="table" 				
 				value="#{loanController.currentLoan.loanSchedule}" 
 				var="schedule">
 				<b:dataTableColumn label="PaymentNo" 
@@ -71,8 +72,12 @@
 					value="#{of:formatCurrency(schedule.remainingBalance,'$')}"/>
 				
 			</b:dataTable>
+			</p:outputPanel>
 		</b:container>
 
+
+<f:verbatim>
+</f:verbatim>					
 
 	</h:body>
 

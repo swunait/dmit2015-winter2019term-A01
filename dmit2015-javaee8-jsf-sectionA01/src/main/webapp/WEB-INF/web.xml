@@ -100,4 +100,10 @@
 		<mime-type>font/woff2</mime-type>
 	</mime-mapping>
 	
+	<data-source>
+		<name>java:global/datasources/h2DS</name>
+		<class-name>org.h2.jdbcx.JdbcDataSource</class-name>
+		<url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</url>
+	</data-source> 
+	
 </web-app>
