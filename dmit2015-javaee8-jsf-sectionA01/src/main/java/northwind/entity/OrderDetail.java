@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="`Order Details`")
-@NamedQuery(name="OrderDetail.findAll", query="SELECT o FROM OrderDetail o")
 public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 

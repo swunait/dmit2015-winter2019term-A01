@@ -7,7 +7,7 @@ import northwind.entity.Product;
 
 public class ProductRespository extends AbstractJpaRepository<Product> {
 
-	@PersistenceContext(unitName="classicmodelsPU")
+	@PersistenceContext(unitName="NorthwindPU")
 	private EntityManager entityManager;
 
 	@Override

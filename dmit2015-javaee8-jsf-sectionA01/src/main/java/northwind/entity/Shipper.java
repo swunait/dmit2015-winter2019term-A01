@@ -20,7 +20,6 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="Shippers")
-@NamedQuery(name="Shipper.findAll", query="SELECT s FROM Shipper s")
 public class Shipper implements Serializable {
 	private static final long serialVersionUID = 1L;
 

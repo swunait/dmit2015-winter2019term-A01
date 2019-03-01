@@ -22,7 +22,6 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="Territories")
-@NamedQuery(name="Territory.findAll", query="SELECT t FROM Territory t")
 public class Territory implements Serializable {
 	private static final long serialVersionUID = 1L;
 

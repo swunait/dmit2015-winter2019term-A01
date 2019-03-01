@@ -19,7 +19,6 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-@NamedQuery(name="Region.findAll", query="SELECT r FROM Region r")
 public class Region implements Serializable {
 	private static final long serialVersionUID = 1L;
 

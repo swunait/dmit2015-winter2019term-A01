@@ -7,7 +7,7 @@ import northwind.entity.Shipper;
 
 public class ShipperRespository extends AbstractJpaRepository<Shipper> {
 
-	@PersistenceContext(unitName="classicmodelsPU")
+	@PersistenceContext(unitName="NorthwindPU")
 	private EntityManager entityManager;
 
 	@Override

@@ -19,35 +19,22 @@
     	<meta charset="utf-8" />
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />    
         
-        <title>Artist list</title>        
+        <title>New Artist</title>        
     </h:head>
 
 	<h:body>
-		<h1>Artist</h1>
+		<h1>Artist Detail</h1>
 
 		<b:messages id="messages" />
 		
 		<b:form>
-			<b:dataTable id="dataTable" 
-				value="#{artists}" 
-				var="item">
+			<b:inputText id="artistName" label="Aritst name" 
+				value="#{artistDetail.name}"
+				/>
 			
-				<b:dataTableColumn label="Artist ID" value="#{item.artistId}" />
-	
-				<b:dataTableColumn label="Artist Name" value="#{item.name}" />
-	
-				<b:dataTableColumn label="Action">
-					<b:commandButton value="delete" 	
-							iconAwesome="trash"			
-							immediate="true"
-							onclick="return confirm('Are you sure you want to delete #{item.name}?')"
-							action="#{artistCRUDController.delete(item)}"
-							update="messages dataTable">
-					</b:commandButton>
-				</b:dataTableColumn>
-			
-			</b:dataTable>
-			
+			<b:commandButton value="Submit New" 
+				action="#{artistCRUDController.create()}"
+				update="messages artistName"/>
 		</b:form>
 
 	</h:body>
