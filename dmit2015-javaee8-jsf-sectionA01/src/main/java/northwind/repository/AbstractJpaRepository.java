@@ -32,7 +32,10 @@ public abstract class AbstractJpaRepository<T> {
     }
 
     public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+    	if (!getEntityManager().contains(entity)) {
+    		entity = getEntityManager().merge(entity);
+    	}
+    	getEntityManager().remove(entity);
         getEntityManager().flush();
     }
 

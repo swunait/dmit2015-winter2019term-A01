@@ -2,13 +2,21 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
  * The persistent class for the Products database table.
  * 
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="Products")
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
@@ -32,9 +40,6 @@ public class Product implements Serializable {
 	@Column(name="ReorderLevel")
 	private short reorderLevel;
 
-	@Column(name="SupplierID")
-	private int supplierID;
-
 	@Column(name="UnitPrice")
 	private BigDecimal unitPrice;
 
@@ -44,10 +49,20 @@ public class Product implements Serializable {
 	@Column(name="UnitsOnOrder")
 	private short unitsOnOrder;
 
+	//bi-directional many-to-one association to OrderDetail
+	@XmlTransient
+	@OneToMany(mappedBy="product")
+	private List<OrderDetail> orderDetails;
+
 	//bi-directional many-to-one association to Category
 	@ManyToOne
 	@JoinColumn(name="CategoryID")
 	private Category category;
+
+	//bi-directional many-to-one association to Supplier
+	@ManyToOne
+	@JoinColumn(name="SupplierID")
+	private Supplier supplier;
 
 	public Product() {
 	}
@@ -92,14 +107,6 @@ public class Product implements Serializable {
 		this.reorderLevel = reorderLevel;
 	}
 
-	public int getSupplierID() {
-		return this.supplierID;
-	}
-
-	public void setSupplierID(int supplierID) {
-		this.supplierID = supplierID;
-	}
-
 	public BigDecimal getUnitPrice() {
 		return this.unitPrice;
 	}
@@ -124,12 +131,42 @@ public class Product implements Serializable {
 		this.unitsOnOrder = unitsOnOrder;
 	}
 
+	public List<OrderDetail> getOrderDetails() {
+		return this.orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	public OrderDetail addOrderDetail(OrderDetail orderDetail) {
+		getOrderDetails().add(orderDetail);
+		orderDetail.setProduct(this);
+
+		return orderDetail;
+	}
+
+	public OrderDetail removeOrderDetail(OrderDetail orderDetail) {
+		getOrderDetails().remove(orderDetail);
+		orderDetail.setProduct(null);
+
+		return orderDetail;
+	}
+
 	public Category getCategory() {
 		return this.category;
 	}
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Supplier getSupplier() {
+		return this.supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 }
