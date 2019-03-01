@@ -15,11 +15,17 @@
 	<persistence-unit name="NorthwindPU">
        <!--  <jta-data-source>java:global/datasources/h2DS</jta-data-source> -->
 		<jta-data-source>java:jboss/datasources/MysqlNorthwindDS</jta-data-source>
-		
+		<class>northwind.entity.Employee</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			
 		</properties>
+	</persistence-unit>
+	
+	<persistence-unit name="ChinookPU">
+		<jta-data-source>java:jboss/datasources/ChinookDS</jta-data-source>
+		<class>chinook.entity.Employee</class>
+		
 	</persistence-unit>
 	
 	
