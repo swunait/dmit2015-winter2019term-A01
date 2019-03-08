@@ -6,7 +6,15 @@
 	<persistence-unit name="NorthwindPU" transaction-type="JTA">
 		<jta-data-source>java:jboss/datasources/NorthwindDS</jta-data-source>
 		<class>northwind.entity.Category</class>
+		<class>northwind.entity.Customer</class>
+		<class>northwind.entity.Employee</class>
+		<class>northwind.entity.OrderDetail</class>
+		<class>northwind.entity.OrderDetailPK</class>
+		<class>northwind.entity.Order</class>
 		<class>northwind.entity.Product</class>
+		<class>northwind.entity.Region</class>
 		<class>northwind.entity.Shipper</class>
+		<class>northwind.entity.Supplier</class>
+		<class>northwind.entity.Territory</class>
 	</persistence-unit>
 </persistence>
