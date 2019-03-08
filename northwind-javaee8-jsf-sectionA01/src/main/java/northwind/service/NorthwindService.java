@@ -28,6 +28,9 @@ public class NorthwindService {
 	}
 	
 	public void deleteCategory(Category existingCategory) {
+		if (!entityManager.contains(existingCategory)) {
+			existingCategory = entityManager.merge(existingCategory);			
+		}
 		entityManager.remove(existingCategory);
 	}
 	
@@ -52,7 +55,9 @@ public class NorthwindService {
 	}
 	
 	public void deleteShipper(Shipper existingShipper) {
-		existingShipper = entityManager.merge(existingShipper);
+		if (!entityManager.contains(existingShipper)) {
+			existingShipper = entityManager.merge(existingShipper);			
+		}
 		entityManager.remove(existingShipper);
 	}
 	

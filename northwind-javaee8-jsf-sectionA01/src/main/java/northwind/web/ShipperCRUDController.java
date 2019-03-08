@@ -54,6 +54,7 @@ public class ShipperCRUDController implements Serializable {
 	public void delete(Shipper existingShipper) {
 		try {
 			northwindService.deleteShipper(existingShipper);
+			shippers.remove(existingShipper);
 			Messages.addGlobalInfo("Delete was successful");
 		} catch (Exception e) {
 			Messages.addGlobalError("Delete was not successful");
