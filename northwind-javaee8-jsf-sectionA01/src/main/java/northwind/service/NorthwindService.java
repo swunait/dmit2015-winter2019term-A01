@@ -46,7 +46,10 @@ public class NorthwindService {
 	}
 	
 	public void createShipper(Shipper newShipper) {
-		
+//		int nextShipperID = (int) entityManager.createQuery(
+//				"SELECT MAX(s.shipperID) + 1 FROM Shipper s"
+//				).getSingleResult(); 
+//		newShipper.setShipperID(nextShipperID);		
 		entityManager.persist(newShipper);
 	}
 
