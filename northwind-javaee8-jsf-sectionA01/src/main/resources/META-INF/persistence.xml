@@ -4,7 +4,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="NorthwindPU" transaction-type="JTA">
-		<jta-data-source>java:jboss/datasources/NorthwindDS</jta-data-source>
+		<jta-data-source>java:app/datasources/northwind-javaee8-jsf-sectionA01/NorthwindDS</jta-data-source>
+				
 		<class>northwind.entity.Category</class>
 		<class>northwind.entity.Customer</class>
 		<class>northwind.entity.Employee</class>

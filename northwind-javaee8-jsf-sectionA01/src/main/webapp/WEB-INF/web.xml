@@ -23,4 +23,13 @@
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
+	
+<!-- 	<data-source> -->
+<!--         <name>java:app/datasources/northwind-javaee8-jsf-sectionA01/NorthwindDS</name> -->
+<!--         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name> -->
+<!--         <url>jdbc:mysql://localhost:3306/northwind?serverTimezone=UTC</url> -->
+<!--         <user>dmit2015</user> -->
+<!--         <password>Password2015</password> -->
+<!--     </data-source> -->
+
 </web-app>
