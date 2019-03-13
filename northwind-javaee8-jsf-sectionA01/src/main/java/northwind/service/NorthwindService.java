@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import northwind.entity.Category;
 import northwind.entity.Shipper;
+import northwind.report.CategorySalesRevenue;
 
 @Stateless	// Mark this class a stateless EJB
 //@ApplicationScoped
@@ -18,6 +19,17 @@ public class NorthwindService {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	public List<CategorySalesRevenue> findCategorySalesRevenues() {
+		return entityManager.createQuery(
+			"SELECT new northwind.report.CategorySalesRevenue( "
+				+ "c.categoryName, SUM(od.unitPrice * od.quantity * (1 - od.discount)) AS CategoryTotal "
+			+ ")"
+			+ " FROM Order o, IN (o.orderDetails) od, IN (od.product) p, IN (p.category) c "
+			+ " GROUP BY c.categoryName ", 
+			CategorySalesRevenue.class)
+			.getResultList();
+	}
 	
 	public void createCategory(Category newCategory) {
 		entityManager.persist(newCategory);
