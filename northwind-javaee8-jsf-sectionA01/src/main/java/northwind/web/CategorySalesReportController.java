@@ -11,6 +11,7 @@ import javax.inject.Named;
 import org.omnifaces.util.Messages;
 
 import lombok.Getter;
+import lombok.Setter;
 import northwind.report.CategorySalesRevenue;
 import northwind.service.NorthwindService;
 
@@ -22,14 +23,27 @@ public class CategorySalesReportController implements Serializable {
 	@Inject
 	private NorthwindService northwindService;
 	
+	@Getter @Setter private Integer selectedSalesYear;
+	@Getter private List<Integer> orderYears;
+	
 	@Getter private List<CategorySalesRevenue> categorySalesRevenues;
 	
 	@PostConstruct
 	void init() {
 		try {
-			categorySalesRevenues = northwindService.findCategorySalesRevenues();			
+			categorySalesRevenues = northwindService.findCategorySalesRevenues();
+			orderYears = northwindService.findYearsWithOrders();
 		} catch(Exception e) {
 			Messages.addGlobalError("Error retreiving category sales report");
+		}
+	}
+	
+	public void generateReport() {
+		if (selectedSalesYear == null) {
+			categorySalesRevenues = northwindService.findCategorySalesRevenues();		
+		} else {
+			categorySalesRevenues = northwindService.findCategorySalesRevenuesByYear(
+					selectedSalesYear);
 		}
 	}
 

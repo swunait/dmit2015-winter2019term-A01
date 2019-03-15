@@ -26,8 +26,33 @@ public class NorthwindService {
 				+ "c.categoryName, SUM(od.unitPrice * od.quantity * (1 - od.discount)) AS CategoryTotal "
 			+ ")"
 			+ " FROM Order o, IN (o.orderDetails) od, IN (od.product) p, IN (p.category) c "
-			+ " GROUP BY c.categoryName ", 
+			+ " GROUP BY c.categoryName "
+			+ " ORDER BY CategoryTotal DESC ", 
 			CategorySalesRevenue.class)
+			.getResultList();
+	}
+	
+	public List<CategorySalesRevenue> findCategorySalesRevenuesByYear(Integer salesYear) {
+		return entityManager.createQuery(
+"SELECT new northwind.report.CategorySalesRevenue( "
+	+ "c.categoryName, SUM(od.unitPrice * od.quantity * (1 - od.discount)) AS CategoryTotal "
++ ")"
++ " FROM Order o, IN (o.orderDetails) od, IN (od.product) p, IN (p.category) c "
++ " WHERE o.shippedDate IS NOT NULL AND YEAR(o.shippedDate) = :yearValue"
++ " GROUP BY c.categoryName "
++ " ORDER BY CategoryTotal DESC ", 
+			CategorySalesRevenue.class)
+			.setParameter("yearValue", salesYear)
+			.getResultList();
+	}
+	
+	public List<Integer> findYearsWithOrders() {
+		return entityManager.createQuery(
+			"SELECT YEAR(o.orderDate) As OrderYear "
+				+ " FROM Order o "
+				+ " GROUP BY YEAR(o.orderDate) "
+				+ " ORDER BY YEAR(o.orderDate) DESC ", 
+			Integer.class)
 			.getResultList();
 	}
 	

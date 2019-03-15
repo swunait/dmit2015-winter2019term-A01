@@ -24,37 +24,60 @@
 
 	<h:body>
 		<h1>Category Sales Report</h1>
-		
+<b:container>
 		<b:messages id="messages" />
 		<b:form>
-			<hf:chart type="pie" title="Category Sales" alpha3d="45" beta3d="0">
+<b:selectOneMenu id="year" 
+	value="#{categorySalesReportController.selectedSalesYear}"
+	onchange="ajax:categorySalesReportController.generateReport()"
+	update="outputPanel">
+	<f:selectItem itemLabel="All Years" itemValue="" />
+	<f:selectItems value="#{categorySalesReportController.orderYears}"
+		var="year"
+		itemValue="#{year}"
+		itemLabel="#{year}" />		
+</b:selectOneMenu>
+<p:outputPanel id="outputPanel">
+	<b:tabView>
+		<b:tab title="Pie Chart">
+			<hf:chart type="pie" title="Category Sales" >
 				<hf:chartSerie name="Category Name" 
 					value="#{categorySalesReportController.categorySalesRevenues}" 
 					var="point" 
 					point="#{point.categorySalesTotal}"
 					tickLabel="#{point.categoryName}" />				
-			</hf:chart>
-			
+			</hf:chart>		
+		</b:tab>
+		<b:tab title="Bar Chart">
 			<hf:chart type="bar" title="Category Sales" >
 				<hf:chartSerie name="Category Name" 
 					value="#{categorySalesReportController.categorySalesRevenues}" 
 					var="point" 
 					point="#{point.categorySalesTotal}"
-					tickLabel="#{point.categoryName}" />
-				
-			</hf:chart>
-			
-			
-			<hf:chart type="column" title="Category Sales" >
-				<hf:chartSerie name="Category Name" 
-					value="#{categorySalesReportController.categorySalesRevenues}" 
-					var="point" 
-					point="#{point.categorySalesTotal}"
-					tickLabel="#{point.categoryName}" />
-				
-			</hf:chart>
+					tickLabel="#{point.categoryName}" />				
+			</hf:chart>		
+		</b:tab>
+	</b:tabView>
+	
+	<p:dataTable id="datatable"
+		value="#{categorySalesReportController.categorySalesRevenues}"
+		var="item">
+		<p:column headerText="Category Name">
+			<h:outputText value="#{item.categoryName}" />
+		</p:column>	
+		<p:column headerText="Sales Total" styleClass="text-right">
+			<h:outputText value="#{item.categorySalesTotal}">
+				<f:convertNumber type="currency"/>
+			</h:outputText>
+		</p:column>			
+	</p:dataTable>
+
+</p:outputPanel>
+		
+		
 		</b:form>
 
+</b:container>		
 
 	</h:body>
 
