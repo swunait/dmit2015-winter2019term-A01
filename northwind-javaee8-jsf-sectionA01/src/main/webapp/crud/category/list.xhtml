@@ -13,12 +13,32 @@
 	xmlns:b="http://bootsfaces.net/ui"
 	template="/WEB-INF/templates/northwind-jsf-template.xhtml">
 	
-	<ui:param name="title" value="Northwind Home Page" />
+	<ui:param name="title" value="List Category" />
 
 	<ui:define name="maincontent">
-		<h1>DMIT2015 - Enterprise Application Development</h1>
-		<h2>Northwind Traders Demo App</h2>
 		
+		<b:messages id="messages" />
+			
+			<b:form>
+				<b:dataTable id="datatable"
+					value="#{categorys}"
+					var="item">
+					
+					<b:dataTableColumn label="CategoryID" value="#{item.categoryID}" />
+					
+					<b:dataTableColumn label="Category Name" value="#{item.categoryName}" />
+					
+					<b:dataTableColumn label="Description" value="#{item.description}" />
+					
+					<b:dataTableColumn>
+						<o:graphicImage value="#{item.picture}"
+							dataURI="true"
+							rendered="#{item.picture != null}"
+							/> 
+					</b:dataTableColumn>
+					
+				</b:dataTable>
+			</b:form>	
 
 		
 		

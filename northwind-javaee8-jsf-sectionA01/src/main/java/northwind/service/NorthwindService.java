@@ -3,132 +3,101 @@ package northwind.service;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+//import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 
 import northwind.entity.Category;
 import northwind.entity.Order;
 import northwind.entity.Shipper;
 import northwind.report.CategorySalesRevenue;
+import northwind.repository.CategoryRepository;
+import northwind.repository.CustomerRepository;
+import northwind.repository.EmployeeRepository;
+import northwind.repository.OrderRepository;
+import northwind.repository.ProductRepository;
+import northwind.repository.ShipperRepository;
 
-@Stateless	// Mark this class a stateless EJB
+@Stateless	
 //@ApplicationScoped
 //@Transactional
 public class NorthwindService {
 	
-	@PersistenceContext
-	private EntityManager entityManager;
+	@Inject
+	private OrderRepository orderRepository;
+
+	@Inject
+	private CategoryRepository categoryRepository;
+
+	@Inject
+	private ProductRepository productRepository;
+
+	@Inject
+	private CustomerRepository customerRepository;
+
+	@Inject
+	private EmployeeRepository employeeRepository;
+
+	@Inject
+	private ShipperRepository shipperRepository;
 	
 	public Order findOneOrder(int orderID) {
-		Order singleResult = null;
-		try {
-			singleResult = entityManager.createQuery(
-				"FROM Order o JOIN FETCH o.orderDetails "
-				+ " WHERE o.orderID = :idValue"
-				,Order.class)
-				.setParameter("idValue", orderID)
-				.getSingleResult();
-		} catch(NonUniqueResultException | NoResultException e) {
-			// do nothing
-			e.printStackTrace();
-		}
-		
-		return singleResult;
+		return orderRepository.findOneOrder(orderID);
 	}
 	
 	public List<CategorySalesRevenue> findCategorySalesRevenues() {
-		return entityManager.createQuery(
-			"SELECT new northwind.report.CategorySalesRevenue( "
-				+ "c.categoryName, SUM(od.unitPrice * od.quantity * (1 - od.discount)) AS CategoryTotal "
-			+ ")"
-			+ " FROM Order o, IN (o.orderDetails) od, IN (od.product) p, IN (p.category) c "
-			+ " GROUP BY c.categoryName "
-			+ " ORDER BY CategoryTotal DESC ", 
-			CategorySalesRevenue.class)
-			.getResultList();
+		return orderRepository.findCategorySalesRevenues();
 	}
 	
 	public List<CategorySalesRevenue> findCategorySalesRevenuesByYear(Integer salesYear) {
-		return entityManager.createQuery(
-"SELECT new northwind.report.CategorySalesRevenue( "
-	+ "c.categoryName, SUM(od.unitPrice * od.quantity * (1 - od.discount)) AS CategoryTotal "
-+ ")"
-+ " FROM Order o, IN (o.orderDetails) od, IN (od.product) p, IN (p.category) c "
-+ " WHERE o.shippedDate IS NOT NULL AND YEAR(o.shippedDate) = :yearValue"
-+ " GROUP BY c.categoryName "
-+ " ORDER BY CategoryTotal DESC ", 
-			CategorySalesRevenue.class)
-			.setParameter("yearValue", salesYear)
-			.getResultList();
+		return orderRepository.findCategorySalesRevenuesByYear(salesYear);
 	}
 	
 	public List<Integer> findYearsWithOrders() {
-		return entityManager.createQuery(
-			"SELECT YEAR(o.orderDate) As OrderYear "
-				+ " FROM Order o "
-				+ " GROUP BY YEAR(o.orderDate) "
-				+ " ORDER BY YEAR(o.orderDate) DESC ", 
-			Integer.class)
-			.getResultList();
+		return orderRepository.findYearsWithOrders();
 	}
 	
 	public void createCategory(Category newCategory) {
-		entityManager.persist(newCategory);
+		categoryRepository.create(newCategory);
 	}
 
 	public void updateCategory(Category existingCategory) {
-		entityManager.merge(existingCategory);
+		categoryRepository.edit(existingCategory);
 	}
 	
 	public void deleteCategory(Category existingCategory) {
-		if (!entityManager.contains(existingCategory)) {
-			existingCategory = entityManager.merge(existingCategory);			
-		}
-		entityManager.remove(existingCategory);
+		categoryRepository.remove(existingCategory);
 	}
 	
 	public Category findOneCategory(int categoryID) {
-		return entityManager.find(Category.class, categoryID);
+		return categoryRepository.find(categoryID);
 	}
 	
 	public List<Category> findAllCategory() {
-		return entityManager.createQuery(
-				"FROM Category c ORDER BY c.categoryName",
-				Category.class
-			).getResultList();
+		return categoryRepository.findAllOrderByCategoryName();
 	}
 	
 	public void createShipper(Shipper newShipper) {
-//		int nextShipperID = (int) entityManager.createQuery(
-//				"SELECT MAX(s.shipperID) + 1 FROM Shipper s"
-//				).getSingleResult(); 
-//		newShipper.setShipperID(nextShipperID);		
-		entityManager.persist(newShipper);
+		shipperRepository.create(newShipper);
 	}
 
 	public void updateShipper(Shipper existingShipper) {
-		entityManager.merge(existingShipper);
+		shipperRepository.edit(existingShipper);
 	}
 	
 	public void deleteShipper(Shipper existingShipper) {
-		if (!entityManager.contains(existingShipper)) {
-			existingShipper = entityManager.merge(existingShipper);			
-		}
-		entityManager.remove(existingShipper);
+		shipperRepository.remove(existingShipper);
 	}
 	
-	public Shipper findOneShipper(int ShipperID) {
-		return entityManager.find(Shipper.class, ShipperID);
+	public Shipper findOneShipper(int shipperID) {
+		return shipperRepository.find(shipperID);
 	}
 	
 	public List<Shipper> findAllShipper() {
-		return entityManager.createQuery(
-				"FROM Shipper s ORDER BY s.companyName",
-				Shipper.class
-			).getResultList();
+		return shipperRepository.findAllOrderByCompanyName();
 	}
 }

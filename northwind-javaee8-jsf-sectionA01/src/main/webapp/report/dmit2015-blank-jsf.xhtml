@@ -19,38 +19,12 @@
     	<meta charset="utf-8" />
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />    
         
-        <title>Find Order by OrderID</title>        
+        <title>Hello World</title>        
     </h:head>
 
 	<h:body>
-		<b:container>
-			<h1>Find Order By OrderID</h1>
-			
-			<b:messages id="messages" />
-			
-			<b:form>
-				<b:inputText id="queryIdValue"
-					value="#{orderQuerySingleResultController.queryIdValue}" />
-					
-				<b:commandButton 
-					value="Search"
-					look="primary"
-					icon-awesome="search"
-					action="#{orderQuerySingleResultController.doSearch()}"
-					update="messages querySingleResultOutputPanel" />	
-					
-				<b:commandButton 
-					value="Cancel"
-					icon-awesome="ban" 
-					action="#{orderQuerySingleResultController.doCancel()}"
-					update="messages querySingleResultOutputPanel"
-					/>	
-	
-				<ui:include src="/report/salesInvoiceDetail.xhtml" />
-	
-			</b:form>
-		
-		</b:container>
+		<h1>Hello World</h1>
+
 
 	</h:body>
 
