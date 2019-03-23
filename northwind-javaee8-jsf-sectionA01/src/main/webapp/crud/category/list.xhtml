@@ -34,7 +34,16 @@
 						<o:graphicImage value="#{item.picture}"
 							dataURI="true"
 							rendered="#{item.picture != null}"
+							width="175"
+							height="100"							
 							/> 
+					</b:dataTableColumn>
+					
+					<b:dataTableColumn label="Action">					
+						<b:link id="editLink" outcome="edit"  icon-awesome="edit" icon-size="lg">
+							<f:param name="editId" value="#{item.categoryID}" />
+							edit
+						</b:link>					
 					</b:dataTableColumn>
 					
 				</b:dataTable>

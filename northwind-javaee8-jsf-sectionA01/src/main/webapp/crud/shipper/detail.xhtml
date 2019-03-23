@@ -11,29 +11,21 @@
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:p="http://primefaces.org/ui"  
 	xmlns:b="http://bootsfaces.net/ui"
-	template="/WEB-INF/templates/northwind-jsf-template.xhtml">
-	
-	<ui:param name="title" value="New Shipper" />
-
-	<ui:define name="maincontent">
-		
-		<b:jumbotron>
-			<h1>New Shipper Details</h1>
-		</b:jumbotron>
-
-		<b:messages id="messages" />
-		
-		<b:form id="createForm">
-		
-			<ui:include src="/crud/shipper/detail.xhtml" />
+>
+	<p:outputPanel id="detailPanel">
+		<b:panel title="Shipper Details" 
+			collapsible="false"
+			rendered="#{shipperCRUDController.shipperDetail != null ? 'true' : 'false'}"> 
 			
-			<b:commandButton value="Submit New"
-				look="primary"
-				iconAwesome="save"
-				action="#{shipperCRUDController.create()}"
-				update=":messages detailPanel" />
-		</b:form>
-		
-	</ui:define>
+			<b:inputText id="companyName"
+				label="Company Name" 
+				value="#{shipperCRUDController.shipperDetail.companyName}"/>
+				
+			<b:inputText id="phone" 
+				label="Phone:" 
+				value="#{shipperCRUDController.shipperDetail.phone}"/>	
+				
+		</b:panel>
+	</p:outputPanel>
 
 </ui:composition>

@@ -47,4 +47,14 @@ public class OrderQuerySingleResultController implements Serializable {
 		querySingleResult = null;
 	}
 	
+	public double invoiceTotal() {
+		double total = 0;
+		if (querySingleResult != null) {
+			total = querySingleResult.getOrderDetails().stream().mapToDouble( 
+						od -> od.getQuantity() * od.getUnitPrice().doubleValue() * (1 - od.getDiscount()) 
+					).sum()
+					+ querySingleResult.getFreight().doubleValue();	
+		}
+		return total;
+	}
 }

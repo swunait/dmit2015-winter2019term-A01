@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hf="http://highfaces.org"
+	template="/WEB-INF/templates/northwind-jsf-template.xhtml"
+>
+	<ui:param name="title" value="[no title]" />
+	
+	<ui:define name="maincontent">
+		<h1>Category Sales Report</h1>
+
+		<b:messages id="messages" />
+
+		<b:form>
+			<b:selectOneMenu id="year" 
+				value="#{categorySalesReportController.selectedSalesYear}"
+				onchange="ajax:categorySalesReportController.generateReport()"
+				update="outputPanel">
+				<f:selectItem itemLabel="All Years" itemValue="" />
+				<f:selectItems value="#{categorySalesReportController.orderYears}"
+					var="year"
+					itemValue="#{year}"
+					itemLabel="#{year}" />		
+			</b:selectOneMenu>
+
+			<p:outputPanel id="outputPanel">
+				<b:tabView>
+					<b:tab title="Pie Chart">
+						<hf:chart type="pie" title="Category Sales" >
+							<hf:chartSerie name="Category Name" 
+								value="#{categorySalesReportController.categorySalesRevenues}" 
+								var="point" 
+								point="#{point.categorySalesTotal}"
+								tickLabel="#{point.categoryName}" 
+								dataLabel="{point.name} ({point.percentage:.1f}%) ({point.y:.0f})"/>				
+						</hf:chart>		
+					</b:tab>
+					<b:tab title="Bar Chart">
+						<hf:chart type="bar" title="Category Sales" >
+							<hf:chartSerie name="Category Name" 
+								value="#{categorySalesReportController.categorySalesRevenues}" 
+								var="point" 
+								point="#{point.categorySalesTotal}"
+								tickLabel="#{point.categoryName}"
+								 />				
+						</hf:chart>		
+					</b:tab>
+				</b:tabView>
+				
+				<p:dataTable id="datatable"
+					value="#{categorySalesReportController.categorySalesRevenues}"
+					var="item">
+					<p:column headerText="Category Name">
+						<h:outputText value="#{item.categoryName}" />
+					</p:column>	
+					<p:column headerText="Sales Total" styleClass="text-right">
+						<h:outputText value="#{item.categorySalesTotal}">
+							<f:convertNumber type="currency"/>
+						</h:outputText>
+					</p:column>			
+				</p:dataTable>
+			
+			</p:outputPanel>		
+		
+		</b:form>	
+	</ui:define>	
+</ui:composition>

@@ -2,6 +2,9 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
 
@@ -21,6 +24,8 @@ public class Category implements Serializable {
 	private int categoryID;
 
 	@Column(name="CategoryName")
+	@NotBlank(message="Category Name value is required")
+	@Size(max=15, message="Category Name value cannot contain more than {max} characters")
 	private String categoryName;
 
 	@Lob

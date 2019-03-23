@@ -34,14 +34,20 @@
     <b:navBar brand="Northwind Traders" brandHref="#{request.contextPath}/index.xhtml" fixed="top">
     	<b:navbarLinks>
 
-		<b:dropMenu value="Shippers">
+			<b:dropMenu value="Categories">
+            	<b:navLink value="Create" href="#{request.contextPath}/crud/category/create.xhtml"></b:navLink>
+            	<b:navLink value="List" href="#{request.contextPath}/crud/category/list.xhtml"></b:navLink>
+        	</b:dropMenu>
+
+			<b:dropMenu value="Shippers">
             	<b:navLink value="Create" href="#{request.contextPath}/crud/shipper/create.xhtml"></b:navLink>
             	<b:navLink value="List" href="#{request.contextPath}/crud/shipper/list.xhtml"></b:navLink>
         	</b:dropMenu>
 
+
         	<b:dropMenu value="Sales Reports">
             	<b:navLink value="Category Revenue Report" href="#{request.contextPath}/report/viewCategoryRevenueReport.xhtml"></b:navLink>
-            	<b:navLink value="Find Order by OrderNumber" href="#{request.contextPath}/report/findOrderByOrderNumber.xhtml"></b:navLink>
+            	<b:navLink value="Find Order by OrderID" href="#{request.contextPath}/report/findOrderByOrderID.xhtml"></b:navLink>
             	<b:navLink value="Find Order by Customer" href="#{request.contextPath}/report/findOrderByCustomer.xhtml"></b:navLink>
             	<b:navLink value="Find Order by Employee" href="#{request.contextPath}/report/findOrderByEmployee.xhtml"></b:navLink>
         	</b:dropMenu>

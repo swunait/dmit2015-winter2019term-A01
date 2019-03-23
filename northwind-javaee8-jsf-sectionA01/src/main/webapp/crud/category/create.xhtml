@@ -17,10 +17,22 @@
 
 	<ui:define name="maincontent">
 		
-		
+		<b:jumbotron>
+			<h1>New Category Details</h1>
+		</b:jumbotron>
 
+		<b:messages id="messages" />
 		
+		<b:form id="createForm" enctype="multipart/form-data">
 		
+			<ui:include src="/crud/category/detail.xhtml" />
+			
+			<b:commandButton value="Submit New"
+				look="primary"
+				iconAwesome="save"
+				action="#{categoryCRUDController.create()}"
+				update=":messages detailPanel" />
+		</b:form>
 		
 	</ui:define>
 

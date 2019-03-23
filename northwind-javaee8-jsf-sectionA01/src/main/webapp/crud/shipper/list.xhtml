@@ -30,14 +30,11 @@
 
 				<b:dataTableColumn label="Phone" value="#{item.phone}" />	
 				
-				<b:dataTableColumn label="Action">
-					<b:commandButton value="delete"
-						iconAwesome="trash"
-						immediate="true" 
-						onclick="return confirm('Are you sure you want to delete #{item.companyName}?')"
-						action="#{shipperCRUDController.delete(item)}"
-						update="messages datatable"
-						/>
+				<b:dataTableColumn label="Action">					
+					<b:link id="editLink" outcome="edit"  icon-awesome="edit" icon-size="lg">
+						<f:param name="editId" value="#{item.shipperID}" />
+						edit
+					</b:link>
 				</b:dataTableColumn>
 				
 			</b:dataTable>

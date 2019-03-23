@@ -54,7 +54,8 @@
 					value="#{categorySalesReportController.categorySalesRevenues}" 
 					var="point" 
 					point="#{point.categorySalesTotal}"
-					tickLabel="#{point.categoryName}" />				
+					tickLabel="#{point.categoryName}"
+					dataLabel="{point.name} ({point.percentage.0f}%) ({point.y})" />				
 			</hf:chart>		
 		</b:tab>
 	</b:tabView>
