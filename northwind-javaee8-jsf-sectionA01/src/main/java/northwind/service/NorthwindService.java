@@ -48,10 +48,15 @@ public class NorthwindService {
 	private ShipperRepository shipperRepository;
 	
 	
-	public List<Order> findOrdersByCustomerNumber(String customerID) {
-		return orderRepository.findByCustomerNumber(customerID);
+	public List<Order> findOrdersByCustomerID(String customerID) {
+		return orderRepository.findByCustomerID(customerID);
+	}
+
+	public List<Order> findOrdersByEmployeeID(int employeeID) {
+		return orderRepository.findByEmployeeID(employeeID);
 	}
 	
+
 	public List<Employee> findEmployeesWithSalesOrders() {
 		return orderRepository.findEmployeesWithSalesOrders();
 	}

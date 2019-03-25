@@ -23,11 +23,19 @@ public class OrderRepository extends AbstractNorthwindJpaRepository<Order> {
 			.getResultList();
 	}
 	
-	public List<Order> findByCustomerNumber(String customerID) {
+	public List<Order> findByCustomerID(String customerID) {
 		return getEntityManager().createQuery(
-			"FROM Order o WHERE o.customer.customerID = :customerIDValue ORDER BY o.orderDate DESC"
+			"FROM Order o WHERE o.customer.customerID = :idValue ORDER BY o.orderDate DESC"
 			, Order.class)
-			.setParameter("customerIDValue", customerID)
+			.setParameter("idValue", customerID)
+			.getResultList();
+	}
+	
+	public List<Order> findByEmployeeID(int employeeD) {
+		return getEntityManager().createQuery(
+			"FROM Order o WHERE o.employee.employeeID = :idValue ORDER BY o.orderDate DESC"
+			, Order.class)
+			.setParameter("idValue", employeeD)
 			.getResultList();
 	}
 	

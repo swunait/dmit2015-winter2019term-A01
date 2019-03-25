@@ -78,7 +78,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="#{orderQuerySingleResultController.querySingleResult.orderDetails}">
+					<ui:repeat var="item" 
+					value="#{orderQuerySingleResultController.querySingleResult.orderDetails}">
 						<tr>
 							<td>#{item.product.productID}</td>
 							<td>#{item.product.productName}</td>
@@ -99,7 +100,7 @@
 								</h:outputText>
 							</td>
 						</tr>
-					</c:forEach>
+					</ui:repeat>
 				</tbody>
 				<tfoot>
 					<tr>

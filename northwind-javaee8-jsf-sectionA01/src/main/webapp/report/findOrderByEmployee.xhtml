@@ -11,24 +11,24 @@
 	xmlns:hf="http://highfaces.org"
 	template="/WEB-INF/templates/northwind-jsf-template.xhtml"
 >
-	<ui:param name="title" value="Find Order by Customer" />
+	<ui:param name="title" value="Find Order by Employee" />
 	
 	<ui:define name="maincontent">
-		<h1>Find Order By Customer</h1>
+		<h1>Find Order By Employee</h1>
 			
 		<b:messages id="messages" />
 		
 		<b:form id="queryForm">
-			<b:selectOneMenu id="queryCustomerID"
-				value="#{orderQueryResultListController.queryCustomerID}"
-				label="Select Customer">
+			<b:selectOneMenu id="queryEmployeeID"
+				value="#{orderQueryResultListController.queryEmployeeID}"
+				label="Select Employee">
 				<b:focus />
-				<f:selectItem itemLabel="-- select customer --" itemValue="" />
+				<f:selectItem itemLabel="-- select employee --" itemValue="" />
 				<f:selectItems 
-					value="#{orderQueryResultListController.customersWithOrders}" 
+					value="#{orderQueryResultListController.employeesWithSalesOrders}" 
 					var="item"
-					itemLabel="#{item.companyName}"
-					itemValue="#{item.customerID}" />
+					itemLabel="#{item.firstName} #{item.lastName}"
+					itemValue="#{item.employeeID}" />
 			</b:selectOneMenu>
 		
 			<b:commandButton value="Search"
@@ -36,7 +36,7 @@
 				look="info"
 				ajax="true"
 				update="queryResultListPanel queryForm:querySingleResultOutputPanel messages"
-				actionListener="#{orderQueryResultListController.findResultListByCustomer()}">
+				actionListener="#{orderQueryResultListController.findResultListByEmployee()}">
 			</b:commandButton>
 			<b:commandButton value="Cancel"
 				icon-awesome="ban"

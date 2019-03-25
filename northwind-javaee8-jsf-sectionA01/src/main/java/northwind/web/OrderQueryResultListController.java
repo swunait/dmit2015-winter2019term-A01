@@ -39,7 +39,7 @@ public class OrderQueryResultListController implements Serializable {
 	private List<Customer> customersWithOrders;
 	
 	@Getter @Setter	
-	private Integer querySalesRepresentativeEmployeeNumber;
+	private Integer queryEmployeeID;
 	
 	@Getter
 	private List<Employee> employeesWithSalesOrders;
@@ -55,12 +55,26 @@ public class OrderQueryResultListController implements Serializable {
 	
 	public void findResultListByCustomer() {
 		if (queryCustomerID != null) {
-			queryResultList = northwindService.findOrdersByCustomerNumber(queryCustomerID);
+			queryResultList = northwindService.findOrdersByCustomerID(queryCustomerID);
 			querySingleResultController.setQuerySingleResult(null);
 			if (queryResultList == null || queryResultList.size() == 0 ) {
-				Messages.addGlobalInfo("There are no orders for customerNumber {0}.", queryCustomerID);
+				Messages.addGlobalInfo("There are no orders for customerID {0}.", queryCustomerID);
 			} else {
-				Messages.addGlobalInfo("There are {0} orders for customerNumber {1}", queryResultList.size(), queryCustomerID);
+				Messages.addGlobalInfo("There are {0} orders for customerID {1}", queryResultList.size(), queryCustomerID);
+			}			
+		} else {
+			Messages.addGlobalError("A customer must be selected.");
+		}
+	}
+	
+	public void findResultListByEmployee() {
+		if (queryEmployeeID != null) {
+			queryResultList = northwindService.findOrdersByEmployeeID(queryEmployeeID);
+			querySingleResultController.setQuerySingleResult(null);
+			if (queryResultList == null || queryResultList.size() == 0 ) {
+				Messages.addGlobalInfo("There are no orders for employeeID {0}.", queryCustomerID);
+			} else {
+				Messages.addGlobalInfo("There are {0} orders for employeeID {1}", queryResultList.size(), queryCustomerID);
 			}			
 		} else {
 			Messages.addGlobalError("A customer must be selected.");
