@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 
+import northwind.entity.Customer;
+import northwind.entity.Employee;
 import northwind.entity.Order;
 import northwind.report.CategorySalesRevenue;
 
@@ -12,6 +14,28 @@ public class OrderRepository extends AbstractNorthwindJpaRepository<Order> {
 
 	public OrderRepository() {
 		super(Order.class);
+	}
+	
+	public List<Customer> findCustomersWithOrders() {
+		return getEntityManager().createQuery(
+			"SELECT o.customer FROM Order o GROUP BY o.customer ORDER BY o.customer.companyName"
+			, Customer.class)
+			.getResultList();
+	}
+	
+	public List<Order> findByCustomerNumber(String customerID) {
+		return getEntityManager().createQuery(
+			"FROM Order o WHERE o.customer.customerID = :customerIDValue ORDER BY o.orderDate DESC"
+			, Order.class)
+			.setParameter("customerIDValue", customerID)
+			.getResultList();
+	}
+	
+	public List<Employee> findEmployeesWithSalesOrders() {
+		return getEntityManager().createQuery(
+			"SELECT o.employee FROM Order o GROUP BY o.employee ORDER BY o.employee.firstName, o.employee.lastName"
+			, Employee.class)
+			.getResultList();
 	}
 
 	public Order findOneOrder(int orderID) {

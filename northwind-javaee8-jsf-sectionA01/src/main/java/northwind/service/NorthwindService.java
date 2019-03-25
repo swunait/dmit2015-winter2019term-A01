@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 //import javax.transaction.Transactional;
 
 import northwind.entity.Category;
+import northwind.entity.Customer;
 import northwind.entity.Employee;
 import northwind.entity.Order;
 import northwind.entity.Shipper;
@@ -45,6 +46,19 @@ public class NorthwindService {
 
 	@Inject
 	private ShipperRepository shipperRepository;
+	
+	
+	public List<Order> findOrdersByCustomerNumber(String customerID) {
+		return orderRepository.findByCustomerNumber(customerID);
+	}
+	
+	public List<Employee> findEmployeesWithSalesOrders() {
+		return orderRepository.findEmployeesWithSalesOrders();
+	}
+
+	public List<Customer> findCustomersWithOrders() {
+		return orderRepository.findCustomersWithOrders();
+	}
 	
 	public List<Employee> findAllEmployee() {
 		return employeeRepository.findAll();

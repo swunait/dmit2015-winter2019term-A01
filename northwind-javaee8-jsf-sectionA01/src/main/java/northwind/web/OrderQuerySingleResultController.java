@@ -28,7 +28,7 @@ public class OrderQuerySingleResultController implements Serializable {
 	@Inject
 	private NorthwindService northwindService;
 	
-	public void doSearch() {
+	public void doFindSingleResult() {
 		try {
 			querySingleResult = northwindService.findOneOrder(queryIdValue);
 			if(querySingleResult != null) {
