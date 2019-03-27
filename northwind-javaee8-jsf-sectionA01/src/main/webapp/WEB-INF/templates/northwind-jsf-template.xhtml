@@ -52,6 +52,12 @@
             	<b:navLink value="Find Order by Employee" href="#{request.contextPath}/report/findOrderByEmployee.xhtml"></b:navLink>
         	</b:dropMenu>
 
+	         <h:form>	
+	       		<h:commandLink value="Logout #{request.userPrincipal.name}" action="#{logout.submit()}" 
+	       			rendered="#{not empty request.userPrincipal}">
+	       		</h:commandLink>	        
+	        </h:form> 
+
         </b:navbarLinks>
         
         <b:navbarLinks pull="right">	        
@@ -82,11 +88,6 @@
 	            style="display:none" />
 	        </h:form>
 	        
-	         <h:form>	
-	       		<b:navCommandLink value="Logout #{sessionController.remoteUser}" action="#{sessionController.logout()}" 
-	       			rendered="#{sessionController.loggedIn}">
-	       		</b:navCommandLink>	        
-	        </h:form>
 		</b:navbarLinks>
 
 <f:verbatim>        

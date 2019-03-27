@@ -20,19 +20,24 @@
 	</persistence-unit>
 	
 	<persistence-unit name="SecurityPU" transaction-type="JTA" >
-		<jta-data-source>java:app/datasources/securityapp/SecurityDS</jta-data-source>
+		<jta-data-source>java:app/datasources/northwind-javaee8-jsf-sectionA01/NorthwindDS</jta-data-source>
 		
 		<class>security.entity.LoginUser</class>
       	<class>security.entity.LoginGroup</class>     
-		
+
 		<properties>
-			<property name="javax.persistence.schema-generation.create-source" value="metadata"/>
-			<property name="javax.persistence.schema-generation.drop-source" value="metadata"/>		
-			<property name="javax.persistence.schema-generation.database.action" value="create"/>			
-<!-- 			<property name="javax.persistence.schema-generation.scripts.action" value="create"/> -->
-<!-- 			<property name="javax.persistence.schema-generation.scripts.create-target" value="/home/dmit2015/Desktop/create-security-tables.sql"/>		 -->
-			
+			<property name="javax.persistence.schema-generation.create-source" 
+				value="metadata"/>
+<!-- 			<property name="javax.persistence.schema-generation.database.action"  -->
+<!-- 				value="create"/>	 -->
+<!-- 			<property name="javax.persistence.schema-generation.scripts.action"  -->
+<!-- 				value="drop-and-create"/> -->
+<!-- 	   		<property name="javax.persistence.schema-generation.scripts.create-target"  -->
+<!-- 	   			value="/home/dmit2015/Desktop/northwind-create-tables.sql"/>		 -->
+<!-- 	   		<property name="javax.persistence.schema-generation.scripts.drop-target"  -->
+<!-- 	   			value="/home/dmit2015/Desktop/northwind-drop-tables.sql"/>		 -->
 		</properties>
+				
 		
 	</persistence-unit>
 </persistence>

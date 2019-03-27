@@ -2,6 +2,7 @@ package security.config;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.annotation.FacesConfig;
 import javax.security.enterprise.authentication.mechanism.http.BasicAuthenticationMechanismDefinition;
 import javax.security.enterprise.authentication.mechanism.http.CustomFormAuthenticationMechanismDefinition;
 import javax.security.enterprise.authentication.mechanism.http.FormAuthenticationMechanismDefinition;
@@ -25,17 +26,22 @@ import org.glassfish.soteria.identitystores.annotation.EmbeddedIdentityStoreDefi
 
 @CustomFormAuthenticationMechanismDefinition(
 	loginToContinue = @LoginToContinue(
-		loginPage="/security/customLogin.xhtml", 
+		loginPage="/security/login.xhtml", 
 		useForwardToLogin = false,
-		errorPage="/security/customLogin.xhtml?error")
+		errorPage="")
 )
 
 @EmbeddedIdentityStoreDefinition({
 	@Credentials(
 		callerName = "dmit2015",
 		password = "Password2015",
-		groups = { "Software Developer" }
-	)
+		groups = { "Software Developer", "VIEW_USER_PAGES","VIEW_ADMIN_PAGES" }
+	),
+	@Credentials(
+		callerName = "user2015",
+		password = "Password2015",
+		groups = { "VIEW_USER_PAGES" }
+	),
 })
 
 //@LdapIdentityStoreDefinition(
@@ -49,26 +55,13 @@ import org.glassfish.soteria.identitystores.annotation.EmbeddedIdentityStoreDefi
 //)
 
 @DatabaseIdentityStoreDefinition(
-	dataSourceLookup="java:app/datasources/securityapp/SecurityDS",
+	dataSourceLookup="java:app/datasources/northwind-javaee8-jsf-sectionA01/NorthwindDS",
 	callerQuery="SELECT password FROM LoginUser WHERE username = ?",
 	groupsQuery="SELECT g.groupname FROM LoginUser u, LoginUserGroup ug, LoginGroup g WHERE u.username = ? AND u.id = ug.userid AND ug.groupid = g.id",
-	hashAlgorithm = Pbkdf2PasswordHash.class,
-	hashAlgorithmParameters = { 
-		"Pbkdf2PasswordHash.Iterations=3072", 
-		"Pbkdf2PasswordHash.Algorithm=PBKDF2WithHmacSHA512", 
-		"Pbkdf2PasswordHash.SaltSizeBytes=64" },
 	priority = 10
 )
 
-@DataSourceDefinition(
-	name="java:app/datasources/securityapp/SecurityDS",
-	className="org.h2.jdbcx.JdbcDataSource",
-	url="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
-	user="sa",
-	password="sa"
-)
-
-@ApplicationScoped
+@FacesConfig @ApplicationScoped
 public class ApplicationSecurityConfig {
 
 }

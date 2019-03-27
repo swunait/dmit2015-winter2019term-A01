@@ -98,19 +98,19 @@ public class LoginService {
 		return nextUserId;
 	}
 	
-	private String generateHashPassword(String plainTextPassword) {
-		Map<String, String> parameters= new HashMap<>();
-        parameters.put("Pbkdf2PasswordHash.Iterations", "3072");
-        parameters.put("Pbkdf2PasswordHash.Algorithm", "PBKDF2WithHmacSHA512");
-        parameters.put("Pbkdf2PasswordHash.SaltSizeBytes", "64");
-        passwordHash.initialize(parameters);
-        return passwordHash.generate(plainTextPassword.toCharArray());
-	}
+//	private String generateHashPassword(String plainTextPassword) {
+//		Map<String, String> parameters= new HashMap<>();
+//		parameters.put("Pbkdf2PasswordHash.Iterations", "3072");
+//		parameters.put("Pbkdf2PasswordHash.Algorithm", "PBKDF2WithHmacSHA512");
+//		parameters.put("Pbkdf2PasswordHash.SaltSizeBytes", "64");
+//		passwordHash.initialize(parameters);
+//        return passwordHash.generate(plainTextPassword.toCharArray());
+//	}
 	
 	@Lock(LockType.WRITE)
 	public void addLoginUser(String username, String plainTextPassword, String[] groupNames) throws NoSuchAlgorithmException {
 
-		String hashedPassword = generateHashPassword(plainTextPassword);
+		String hashedPassword = passwordHash.generate(plainTextPassword.toCharArray());
         
         LoginUser newLoginUser = new LoginUser();
         newLoginUser.setId( findNextUserId() );
@@ -152,7 +152,7 @@ public class LoginService {
 //		String hasedPassword = passwordHash.generate(existingLoginUser.getPassword());
 		// verify currentPlainTextPassword is valid
 		if (passwordHash.verify(currentPassword, existingLoginUser.getPassword())) {
-			String newHashedPassword = generateHashPassword(newPlainTextPassword);
+			String newHashedPassword = passwordHash.generate(newPlainTextPassword.toCharArray());
 			existingLoginUser.setPassword(newHashedPassword);
 			entityManager.merge(existingLoginUser);
 		} else {
