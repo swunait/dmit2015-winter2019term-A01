@@ -2,14 +2,12 @@ package northwind.service;
 
 import java.util.List;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-//import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
-//import javax.transaction.Transactional;
+import javax.interceptor.Interceptors;
 
 import northwind.entity.Category;
 import northwind.entity.Customer;
@@ -23,10 +21,12 @@ import northwind.repository.EmployeeRepository;
 import northwind.repository.OrderRepository;
 import northwind.repository.ProductRepository;
 import northwind.repository.ShipperRepository;
+import security.service.SecurityInterceptor;
 
 @Stateless	
-//@ApplicationScoped
-//@Transactional
+//@DeclareRoles({"DMIT2015Instructor","DMIT2015Student","NorthwindManagement","NorthwindEmployee"})
+//@PermitAll
+//@Interceptors({SecurityInterceptor.class})
 public class NorthwindService {
 	
 	@Inject
@@ -73,10 +73,12 @@ public class NorthwindService {
 		return orderRepository.findOneOrder(orderID);
 	}
 	
+//	@RolesAllowed({"DMIT2015Instructor","NorthwindManagement"})
 	public List<CategorySalesRevenue> findCategorySalesRevenues() {
 		return orderRepository.findCategorySalesRevenues();
 	}
 	
+//	@RolesAllowed({"DMIT2015Instructor","NorthwindManagement"})
 	public List<CategorySalesRevenue> findCategorySalesRevenuesByYear(Integer salesYear) {
 		return orderRepository.findCategorySalesRevenuesByYear(salesYear);
 	}

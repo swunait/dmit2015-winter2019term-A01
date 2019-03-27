@@ -32,4 +32,120 @@
 <!--         <password>Password2015</password> -->
 <!--     </data-source> -->
 
+	<!-- Error pages -->
+	<error-page>
+		<error-code>401</error-code>
+		<location>/errorpages/401.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/errorpages/403.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errorpages/404.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/errorpages/500.xhtml</location>
+	</error-page>
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/errorpages/expired.xhtml</location>
+	</error-page>
+	
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<web-resource-name>Use HTTPS only</web-resource-name> -->
+<!-- 			<url-pattern>/*</url-pattern> -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<user-data-constraint> -->
+<!-- 			<transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
+<!-- 		</user-data-constraint> -->
+<!-- 	</security-constraint> -->
+	
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<web-resource-name>anyAuthenticatedUser</web-resource-name> -->
+<!-- 			<url-pattern>/security/changePassword.xhtml</url-pattern> -->
+<!-- 			<url-pattern>/crud/category/list.xhtml</url-pattern> -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>**</role-name> -->
+<!-- 		</auth-constraint> -->
+<!-- 	</security-constraint> -->
+
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<web-resource-name>anyRoleDefinedInWebXml</web-resource-name> -->
+<!-- 			<url-pattern>/crud/shipper/list.xhtml</url-pattern>			 -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>*</role-name> -->
+<!-- 		</auth-constraint> -->
+<!-- 	</security-constraint> -->
+	
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<web-resource-name>softwareDeveloperOnlyResources</web-resource-name> -->
+<!-- 			<url-pattern>/security/manageLoginUser.xhtml</url-pattern>			 -->
+<!-- 			<url-pattern>/security/manageLoginGroup.xhtml</url-pattern>			 -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>Software Developer</role-name> -->
+<!-- 		</auth-constraint> -->
+<!-- 	</security-constraint> -->
+	
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<web-resource-name>Management Resources</web-resource-name> -->
+<!-- 			<url-pattern>/report/viewProductLineRevenueReport.xhtml</url-pattern> -->
+<!-- 			<url-pattern>/crud/category/create.xhtml</url-pattern>			 -->
+<!-- 			<url-pattern>/crud/category/edit.xhtml</url-pattern>			 -->
+<!-- 			<url-pattern>/crud/shipper/create.xhtml</url-pattern>			 -->
+<!-- 			<url-pattern>/crud/shipper/edit.xhtml</url-pattern>			 -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>DMIT2015Instructor</role-name> -->
+<!-- 			<role-name>DMIT2015Student</role-name> -->
+<!-- 			<role-name>NorthwindManagement</role-name> -->
+<!-- 			<role-name>NorthwindEmployee</role-name> -->
+<!-- 		</auth-constraint> -->
+<!-- 	</security-constraint> -->
+	
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<web-resource-name>Report Resources</web-resource-name> -->
+<!-- 			<url-pattern>/report/*</url-pattern> -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>DMIT2015Instructor</role-name> -->
+<!-- 			<role-name>NorthwindManagement</role-name> -->
+<!-- 		</auth-constraint> -->
+<!-- 	</security-constraint> -->
+	
+	<security-role>
+		<role-name>DMIT2015Instructor</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>DMIT2015Student</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>PROG_DMIT</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>NorthwindManager</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>NorthwindEmployee</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>Software Developer</role-name>
+	</security-role>
+	
 </web-app>

@@ -18,4 +18,21 @@
 		<class>northwind.entity.Supplier</class>
 		<class>northwind.entity.Territory</class>
 	</persistence-unit>
+	
+	<persistence-unit name="SecurityPU" transaction-type="JTA" >
+		<jta-data-source>java:app/datasources/securityapp/SecurityDS</jta-data-source>
+		
+		<class>security.entity.LoginUser</class>
+      	<class>security.entity.LoginGroup</class>     
+		
+		<properties>
+			<property name="javax.persistence.schema-generation.create-source" value="metadata"/>
+			<property name="javax.persistence.schema-generation.drop-source" value="metadata"/>		
+			<property name="javax.persistence.schema-generation.database.action" value="create"/>			
+<!-- 			<property name="javax.persistence.schema-generation.scripts.action" value="create"/> -->
+<!-- 			<property name="javax.persistence.schema-generation.scripts.create-target" value="/home/dmit2015/Desktop/create-security-tables.sql"/>		 -->
+			
+		</properties>
+		
+	</persistence-unit>
 </persistence>

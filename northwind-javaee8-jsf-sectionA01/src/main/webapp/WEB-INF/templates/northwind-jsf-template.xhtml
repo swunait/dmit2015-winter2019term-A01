@@ -81,6 +81,12 @@
 	          <b:commandButton class="theme-selector-button" value="select" action="#{theme.selectTheme}"
 	            style="display:none" />
 	        </h:form>
+	        
+	         <h:form>	
+	       		<b:navCommandLink value="Logout #{sessionController.remoteUser}" action="#{sessionController.logout()}" 
+	       			rendered="#{sessionController.loggedIn}">
+	       		</b:navCommandLink>	        
+	        </h:form>
 		</b:navbarLinks>
 
 <f:verbatim>        
