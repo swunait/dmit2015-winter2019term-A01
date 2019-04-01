@@ -54,12 +54,12 @@ import org.glassfish.soteria.identitystores.annotation.EmbeddedIdentityStoreDefi
 //	priority = 5
 //)
 
-@DatabaseIdentityStoreDefinition(
-	dataSourceLookup="java:app/datasources/northwind-javaee8-jsf-sectionA01/NorthwindDS",
-	callerQuery="SELECT password FROM LoginUser WHERE username = ?",
-	groupsQuery="SELECT g.groupname FROM LoginUser u, LoginUserGroup ug, LoginGroup g WHERE u.username = ? AND u.id = ug.userid AND ug.groupid = g.id",
-	priority = 10
-)
+//@DatabaseIdentityStoreDefinition(
+//	dataSourceLookup="java:app/datasources/northwind-javaee8-jsf-sectionA01/NorthwindDS",
+//	callerQuery="SELECT password FROM LoginUser WHERE username = ?",
+//	groupsQuery="SELECT g.groupname FROM LoginUser u, LoginUserGroup ug, LoginGroup g WHERE u.username = ? AND u.id = ug.userid AND ug.groupid = g.id",
+//	priority = 10
+//)
 
 @FacesConfig @ApplicationScoped
 public class ApplicationSecurityConfig {
