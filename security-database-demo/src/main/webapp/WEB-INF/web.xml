@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bootstrap</param-value>
+	</context-param>
+	
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Customer Resources</web-resource-name>
+			<url-pattern>/protected/playlist.html</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>VIEW_CUSTOMER_PAGES</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Employee Resources</web-resource-name>
+			<url-pattern>/protected/customers.html</url-pattern>
+			<url-pattern>/protected/employees.html</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>VIEW_EMPLOYEE_PAGES</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Customer and Employee Resources</web-resource-name>
+			<url-pattern>/protected/invoices.html</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>VIEW_CUSTOMER_PAGES</role-name>
+			<role-name>VIEW_EMPLOYEE_PAGES</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	
+	<security-role>
+		<role-name>VIEW_CUSTOMER_PAGES</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>VIEW_EMPLOYEE_PAGES</role-name>
+	</security-role>
+	
+	
+</web-app>
