@@ -27,16 +27,24 @@
 
 	<dependencies>
 
-<dependency>
-    <groupId>org.glassfish.soteria</groupId>
-    <artifactId>jakarta.security.enterprise</artifactId>
-    <version>1.0.1</version>
-</dependency>
-<dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
-    <version>1.4.197</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		<dependency>
+		    <groupId>com.microsoft.sqlserver</groupId>
+		    <artifactId>mssql-jdbc</artifactId>
+		    <version>7.2.1.jre8</version>
+		</dependency>
+
+		
+		<dependency>
+		    <groupId>org.glassfish.soteria</groupId>
+		    <artifactId>jakarta.security.enterprise</artifactId>
+		    <version>1.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <version>1.4.197</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax</groupId>
