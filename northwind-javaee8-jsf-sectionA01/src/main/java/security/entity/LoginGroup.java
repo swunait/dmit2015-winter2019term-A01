@@ -2,6 +2,8 @@ package security.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
 import java.util.List;
 
 
@@ -17,6 +19,7 @@ public class LoginGroup implements Serializable {
 	@Id
 	private Long id;
 
+	@NotBlank(message="Group Name value is required")
 	@Column(length=64, unique=true, nullable=false)
 	private String groupname;
 

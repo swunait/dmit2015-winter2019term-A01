@@ -2,6 +2,7 @@ package security.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class LoginUser implements Serializable {
 	@Id
 	private Long id;
 
+	@NotBlank(message="Password value is required")
 	@Column(nullable=false)
 	private String password;
 

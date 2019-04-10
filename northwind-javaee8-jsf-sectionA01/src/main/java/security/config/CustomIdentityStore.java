@@ -16,6 +16,7 @@ import security.service.LoginService;
 @ApplicationScoped
 public class CustomIdentityStore implements IdentityStore {
 
+	@Inject
 	private LoginService loginService;
 	
 	@Inject
