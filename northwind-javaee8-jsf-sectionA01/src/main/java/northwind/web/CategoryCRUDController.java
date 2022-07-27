@@ -12,13 +12,12 @@ import javax.inject.Named;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
-import org.primefaces.model.UploadedFile;
 
-import jnr.ffi.Struct.u_int16_t;
 import lombok.Getter;
 import lombok.Setter;
 import northwind.entity.Category;
 import northwind.service.NorthwindService;
+import org.primefaces.model.file.UploadedFile;
 
 @Named
 @ViewScoped
@@ -59,7 +58,7 @@ public class CategoryCRUDController implements Serializable {
 		String outcome = null;
 		try {
 			if(uploadedFile != null) {
-				categoryDetail.setPicture(uploadedFile.getContents());
+				categoryDetail.setPicture(uploadedFile.getContent());
 			}
 			
 			northwindService.createCategory(categoryDetail);
@@ -78,7 +77,7 @@ public class CategoryCRUDController implements Serializable {
 		String outcome = null;
 		try {
 			if(uploadedFile != null) {
-				categoryDetail.setPicture(uploadedFile.getContents());
+				categoryDetail.setPicture(uploadedFile.getContent());
 			}
 			
 			northwindService.updateCategory(categoryDetail);
